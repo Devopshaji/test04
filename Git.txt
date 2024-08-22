@@ -1,0 +1,149 @@
+GIT - Global Information Tracker [Version control tool]
+
+create an ec2 instance
+
+mkdir git
+sudo yum install git
+ls -a
+git init // - command to initialise the respective directory as git repository
+
+
+how do you check a directory is git repo or not?
+if .git folder is present, then that current directory is git repo.
+
+ls -a // .git should be present , it indicates if a particular directory is git repo or not
+
+vi file1
+git add file1   // move files from workspace to staging area/index area
+git commit -m 'add file1' // move files from staging area to git repo
+
+git log // history of repository
+git log -n // will show last n commits
+git log filename // history of particular file name
+git log -n filename // will show last n commits of that particular file
+
+git status // will show whether files are in workspace or staging area or in git repo
+
+
+
+git config --global user.name "ABC"
+git config --global user.email "ABC@gmail.com"
+
+git checkout commitID // used to switch to that particular commitID
+
+
+* get the differences between GIT HUB and git
+
+
+GIT Architecture
+
+we have 4 stages
+
+Workspace - it is a place where we edit , modify project related files
+            All the file in workspace are visible to all directories.
+
+Staging Area - On Git Add, files are moved from workspace to staging area where changes are saved
+
+Local Repo - on Git Commit , files will be added to local/git repo & then we can track the file versions. Commit ID are created here.
+
+Central repo - On Git Push, files are moved to central repo.
+
+
+Branching 
+
+it is for parellel development, teams can work on same piece of code on different branches parellelly and later integrate by merging
+
+why we need branching? --- > to develop new features
+
+git branch ---- list all branches
+git branch branchname --- create new branch
+git checkout branchname ---- switch to branch
+git branch -d branchname --- delete branch
+git checkout -b branchname -- create and checkout to branch
+git brnach -m oldname newname -- rename branch
+git merge branchname --- merge specified branch to checked out branch. create a new commit ID indicating merge
+Merging is only 1 way --- from source to destination
+
+* --- indicates we are on that branch
+
+only 1 master per repository
+
+
+git revert  - committed changes are revertes, but history is not erased
+git reset  - committed changes are reset, even history is removed
+
+Merge Conflict - occurs when same piece of code is been worked on different branches, and when we try to merge , the conflict occurs.
+
+
+
+git cherry_pick commit_id - to merge specific commit on branch(currently checkout branch)
+
+
+Tagging - it is name given to set of versions of files and directories. it is easy to remember the tag names, it indicates milestone of a project.
+
+git tag tagname  -- create tag
+git checkout tagname -- switch to tag
+git tag -d tagname -- delete tag
+
+
+Difference b/w tag and branch
+
+tag is name given to set of files
+branching is for parellel development
+
+
+Rebase - similar to merge.
+	rewrite the commit history
+
+git rebase branchname
+
+What is the difference between Merge and rebase?
+
+Both merge and rebase perform same operation of integrating branches, but the difference is how they do it.
+Merge : Creates new commitID indicating merge
+	Merge conflict can be handled easily, as the commits are reachable
+
+Rebase : Rewrites the history by creating new commits for each commit in source branch
+	since commit history is rewritten, it will be difficult to understand the conflict in some cases as commits are no longer reachable.
+
+Squash : it is a technique to condense large number of commits to make into a small number of meaningful commits so that we can make git history clear
+
+git rebase -i HEAD~n
+
+
+STASH
+
+- If I am working on 1 branch and I get critical work/bug to be fixed on other branch, I dont want to commit changes in current branch, so I will do git stash
+ where the files will be stored in temporary area, and switch to other branch , I will fix the issue and come back to previous branch to continue my work.
+I need to do git stash pop, to get back files from temporary area..
+
+git stash
+git stash pop 
+
+commit --amend -m "New commit message."  // change commit message 
+
+
+
+Git clone - will bring centralrepo to local workspace for 1st time
+git pull -bring changes from central repo and merges automatically to local workspace
+git fetch - bring changes from central repo and stor it on a seperate branch called FETCH_HEAD, you can review the changes and merge manually if required
+
+git pull = fetch + merge
+
+git push - moves local changes to central repo 
+
+
+bare repository - acts as remote repo, we can only run push, pull . We cannot run other git operations// git init --bare
+non bare repository - it is local repo, we can modify files , push to central repo and run all the git commands // git init
+
+.gitignore - text file that tells git which files/folders are to be ignored in project
+
+
+what is git fork  ? 
+Forking a repository means creating a copy of the repo. When you fork a repo, you create your own copy of the repo on your Github account
+
+
+
+
+
+
