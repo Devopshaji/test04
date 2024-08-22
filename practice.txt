@@ -1,0 +1,68 @@
+array = 1 2 3 4 5
+
+// To print the 5th element of the array 
+#!/bin/bash
+echo " ${array[4]} "
+
+
+// yaml file for deployment
+
+apiVersion: apps/V1
+kind: deployment
+metaData: 
+  name: Ngnix-Deploy
+spec:
+  replicas: 4
+  selectors:
+    matchLabels:
+      app: ngnix
+      type: Loadbalancer
+  template:
+    metaData:
+      name: ngnix-pod
+      labels:
+        app: ngnix
+        type: Loadbalancer
+    contaners:
+    - name: ngnix-cont
+      image: ngnix:latest
+      ports:
+        ContainerPort: 80
+
+
+// Multistage dockerfile
+
+FROM maven as build
+RUN git clone URL
+WORKDIR /app
+RUN mvn clean install
+
+FROM tomcat as deploy
+COPY app/target/*.war /webapps 
+
+
+
+
+// pipeline
+
+
+
+pipeline {
+	agent none
+	stages{
+	parallel{
+		stage ('git checkout') {
+			steps { echo "This is a git checkout stage" '
+		 		agent { label 'docker'}
+					git '<URL>'
+				}
+		stage ('git checkout_1') {
+			steps { echo "This is a second git checkout stage" '
+		 		agent { label 'docker'}
+					git '<URL>'
+				}
+		}
+
+		}
+  	}
+}
